@@ -1,5 +1,6 @@
 package org.example.dungeonsanddebugerss.service;
 
+import org.antlr.v4.runtime.misc.LogManager;
 import org.example.dungeonsanddebugerss.entities.CityEntity;
 import org.example.dungeonsanddebugerss.entities.CountryEntity;
 import org.example.dungeonsanddebugerss.entities.CountrylanguageEntity;
@@ -10,10 +11,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.logging.Logger;
 
 
 @Service
 public class WorldService {
+
+    private final Logger logger = Logger.getLogger("Spring Logger");
 
     private CityEntityRepository cityEntityRepository;
     private CountryEntityRepository countryEntityRepository;
@@ -27,28 +32,57 @@ public class WorldService {
     }
 
     public List<CountryEntity> findCountriesWithNoHeadOfState() {
-
     }
 
-
     public float findPercentageOfPopulationInLargestCity(String countryName) {
+        int countryPopTotal = 0;
+        String countryCode = "";
 
+        //for each country
+        for(CountryEntity c : countryEntityRepository.findAll())
+        {
+            if(countryName.equals(c.getName()))
+            {
+                countryPopTotal = c.getPopulation();
+                logger.info("Country: " + c.getName() + " | Population: " + countryPopTotal);
+                countryCode = c.getCode();
+            }
+        }
+
+        if(!countryCode.isEmpty())
+        {
+            int highestPop = 0;
+            String highestPopCityName = "";
+            for(CityEntity c : cityEntityRepository.findAll())
+            {
+                if(countryCode.equals(c.getCountryCode().getCode()))
+                {
+                    if(highestPop < c.getPopulation())
+                    {
+                        highestPop = c.getPopulation();
+                        highestPopCityName = c.getName();
+                    }
+                }
+            }
+            float result = (float) highestPop / countryPopTotal;
+            result *= 100;
+            logger.info("Highest city pop: " + highestPopCityName + " | Population: " + highestPop);
+            logger.info("Percentage: " + result);
+            return result;
+        }
+        return 0;
     }
 
     public List<CountryEntity> findCountryWithMostCity() {
-
     }
 
     public int returnCountOfCitiesInCountry() {
-
     }
 
     public List<CityEntity> find5SmallestDistrictsOfCity() {
-
     }
 
     public int findCountOfMostPopularLanguage(String countryName) {
-
     }
 
 
