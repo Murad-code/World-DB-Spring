@@ -85,16 +85,11 @@ public class WorldService {
                 lowest.add(cityEntity);
             }
         }
-        Comparator<CityEntity> populationComparator = new Comparator<CityEntity>() {
-            @Override
-            public int compare(CityEntity city1, CityEntity city2) {
-                return Integer.compare(city1.getPopulation(), city2.getPopulation());
-            }
-        };
 
-        Collections.sort(cityEntities, populationComparator);
 
-        List<CityEntity> top5Cities = cityEntities.subList(0, Math.min(5, cityEntities.size()));
+        lowest.sort(Comparator.comparing(CityEntity::getPopulation));
+
+        List<CityEntity> top5Cities = lowest.subList(0, Math.min(5, lowest.size()));
 
         for (int i = 0; i < top5Cities.size(); i++) {
             CityEntity cities = top5Cities.get(i);
@@ -128,9 +123,9 @@ public class WorldService {
         for (Map.Entry<CountryEntity, Integer> countryEntry : countryCityMap.entrySet()) {
             if (countryEntry.getValue() >= maxCityCount) {
                 countryWithMostCities.add(countryEntry.getKey());
+        logger.info("The country with most cities is " + countryWithMostCities);
             }
         }
-        logger.info("The country with most cities is " + countryWithMostCities);
         return countryWithMostCities;
 
     }
@@ -146,6 +141,26 @@ public class WorldService {
              }
          }
          return countryCodeCount;
+    }
+
+    public int returnNumOfCities(){
+        ArrayList<CityEntity>  citiesInCountry = new ArrayList<>();
+        List<CountryEntity> countryWithMostCities = findCountryWithMostCity();
+        logger.info("Country with most cities is " + countryWithMostCities);
+        String countryCode = countryWithMostCities.getFirst().getCode();
+        logger.info("Country code for country with most cities is " + countryCode);
+
+         List<CityEntity> cityList = cityEntityRepository.findAll();
+          for(CityEntity city: cityList){
+              if(city.getCountryCode().getCode().equals(countryCode)){
+                  logger.info("City in country with most cities is " + city.getName());
+                  citiesInCountry.add(city);
+
+              }
+
+          }
+
+        return citiesInCountry.size();
     }
 
     public List<CountryEntity> findCountriesWithNoHeadOfState() {

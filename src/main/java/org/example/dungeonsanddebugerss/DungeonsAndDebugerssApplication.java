@@ -25,7 +25,9 @@ public class DungeonsAndDebugerssApplication {
         return args -> {
             logger.info(String.valueOf(worldService.findCountryWithMostCity()));
             List<CityEntity> result = worldService.find5SmallestDistrictsOfCity("Noord-Holland");
-        }
+            logger.info(String.valueOf(worldService.returnNumOfCities()));
+
+        };
     }
 
 }
