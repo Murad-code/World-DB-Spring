@@ -85,16 +85,11 @@ public class WorldService {
                 lowest.add(cityEntity);
             }
         }
-        Comparator<CityEntity> populationComparator = new Comparator<CityEntity>() {
-            @Override
-            public int compare(CityEntity city1, CityEntity city2) {
-                return Integer.compare(city1.getPopulation(), city2.getPopulation());
-            }
-        };
 
-        Collections.sort(cityEntities, populationComparator);
 
-        List<CityEntity> top5Cities = cityEntities.subList(0, Math.min(5, cityEntities.size()));
+        lowest.sort(Comparator.comparing(CityEntity::getPopulation));
+
+        List<CityEntity> top5Cities = lowest.subList(0, Math.min(5, lowest.size()));
 
         for (int i = 0; i < top5Cities.size(); i++) {
             CityEntity cities = top5Cities.get(i);
