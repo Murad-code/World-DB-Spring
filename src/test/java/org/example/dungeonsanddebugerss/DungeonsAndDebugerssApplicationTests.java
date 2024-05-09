@@ -1,17 +1,15 @@
 package org.example.dungeonsanddebugerss;
 
+import org.assertj.core.api.Assert;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Nested;
 import org.example.dungeonsanddebugerss.entities.CityEntity;
 import org.example.dungeonsanddebugerss.respositories.CityEntityRepository;
 import org.example.dungeonsanddebugerss.service.WorldService;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import org.example.dungeonsanddebugerss.service.WorldService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -27,7 +25,7 @@ import static org.mockito.Mockito.when;
 class DungeonsAndDebugerssApplicationTests {
 
     @Autowired
-    private WorldService worldService;
+    WorldService worldService;
 
     @Test
     void contextLoads() {
@@ -125,9 +123,33 @@ class DungeonsAndDebugerssApplicationTests {
         assertEquals("City6", result.get(4).getName());
 
     }
+  
+    @Test
+    @DisplayName("Given invalid country, get percentage returns 0.")
+    void givenInvalidCountryGetPercentageReturns0() {
+        float expected = 0;
+        float result = worldService.findPercentageOfPopulationInLargestCity("Not A Country");
+        Assertions.assertEquals(expected, result);
+    }
 
-  @Test
-  void checkCountryWithNoHeadOfStateIsNotMoreThanOne() {
+    @Test
+    @DisplayName("Given empty country, get percentage returns 0.")
+    void givenEmptyCountryGetPercentReturns0() {
+        float expected = 0;
+        float result = worldService.findPercentageOfPopulationInLargestCity("");
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    @DisplayName("Given valid country, return the percentage of the population of the highest city pop.")
+    void givenValidCountryReturnThePercentageOfThePopulation() {
+        float expected = 4.609178f;
+        float result = worldService.findPercentageOfPopulationInLargestCity("Netherlands");
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    void checkCountryWithNoHeadOfStateIsNotMoreThanOne() {
         Assertions.assertEquals(1, worldService.findCountriesWithNoHeadOfState().size());
     }
     @Nested

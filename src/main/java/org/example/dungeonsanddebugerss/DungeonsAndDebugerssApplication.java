@@ -6,9 +6,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import java.util.logging.Logger;
 
 import java.util.List;
-import java.util.logging.Logger;
+
 
 @SpringBootApplication
 public class DungeonsAndDebugerssApplication {
@@ -17,16 +18,14 @@ public class DungeonsAndDebugerssApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(DungeonsAndDebugerssApplication.class, args);
-
-
     }
+  
     @Bean
     public CommandLineRunner runner(WorldService worldService){
         return args -> {
             logger.info(String.valueOf(worldService.findCountryWithMostCity()));
             List<CityEntity> result = worldService.find5SmallestDistrictsOfCity("Noord-Holland");
-        };
+        }
     }
-
 
 }
