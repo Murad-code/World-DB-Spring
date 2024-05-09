@@ -18,21 +18,15 @@ public class DungeonsAndDebugerssApplication {
     public static void main(String[] args) {
         SpringApplication.run(DungeonsAndDebugerssApplication.class, args);
 
-//    @Bean
-//    public CommandLineRunner run;() {
-//        return args -> {
-//
-//            List<CityEntity> result = WorldService.find5SmallestDistrictsOfCity("Noord-Holland");
-//
-//        };
-//
-//    }
-
 
     }
     @Bean
     public CommandLineRunner runner(WorldService worldService){
-        return args -> logger.info(String.valueOf(worldService.findCountryWithMostCity()));
+        return args -> {
+            logger.info(String.valueOf(worldService.findCountryWithMostCity()));
+            List<CityEntity> result = worldService.find5SmallestDistrictsOfCity("Noord-Holland");
+        };
     }
+
 
 }
