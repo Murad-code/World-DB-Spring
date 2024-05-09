@@ -166,5 +166,9 @@ class DungeonsAndDebugerssApplicationTests {
 
 
         }
+        @Test
+        void checkNumOfMostCitiesReturns363(){
+            Assertions.assertEquals(363, worldService.returnNumOfCities());
+        }
     }
 }
