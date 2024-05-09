@@ -10,16 +10,13 @@ import org.springframework.context.annotation.Bean;
 import java.util.List;
 import java.util.logging.Logger;
 
-
 @SpringBootApplication
 public class DungeonsAndDebugerssApplication {
 
     private static final Logger logger = Logger.getLogger("Spring Logger");
 
-
     public static void main(String[] args) {
         SpringApplication.run(DungeonsAndDebugerssApplication.class, args);
-    }
 
     @Bean
     public CommandLineRunner run() {
@@ -29,7 +26,13 @@ public class DungeonsAndDebugerssApplication {
 
         };
 
-}
+    }
 
+
+    }
+    @Bean
+    public CommandLineRunner runner(WorldService worldService){
+        return args -> logger.info(String.valueOf(worldService.findCountryWithMostCity()));
+    }
 
 }
