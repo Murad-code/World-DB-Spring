@@ -61,4 +61,13 @@ public class CountrylanguageEntity {
         this.percentage = percentage;
     }
 
+    @Override
+    public String toString() {
+        return "CountrylanguageEntity{" +
+                "id=" + id +
+                ", countryCode=" + countryCode +
+                ", isOfficial='" + isOfficial + '\'' +
+                ", percentage=" + percentage +
+                '}';
+    }
 }

@@ -201,4 +201,24 @@ public class CountryEntity {
         this.code2 = code2;
     }
 
+    @Override
+    public String toString() {
+        return "CountryEntity{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", continent='" + continent + '\'' +
+                ", region='" + region + '\'' +
+                ", surfaceArea=" + surfaceArea +
+                ", indepYear=" + indepYear +
+                ", population=" + population +
+                ", lifeExpectancy=" + lifeExpectancy +
+                ", gnp=" + gnp +
+                ", gNPOld=" + gNPOld +
+                ", localName='" + localName + '\'' +
+                ", governmentForm='" + governmentForm + '\'' +
+                ", headOfState='" + headOfState + '\'' +
+                ", capital=" + capital +
+                ", code2='" + code2 + '\'' +
+                '}';
+    }
 }
