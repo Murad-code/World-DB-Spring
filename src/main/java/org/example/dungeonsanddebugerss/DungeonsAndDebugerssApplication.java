@@ -20,23 +20,14 @@ public class DungeonsAndDebugerssApplication {
 
         SpringApplication.run(DungeonsAndDebugerssApplication.class, args);
 
-    @Bean
-    public CommandLineRunner run() {
-        return args -> {
-
-            List<CityEntity> result = WorldService.find5SmallestDistrictsOfCity("Noord-Holland");
-
-        };
-
     }
 
-
-    }
     @Bean
     public CommandLineRunner runner(WorldService worldService){
         return args -> {
-          logger.info(String.valueOf(worldService.findCountryWithMostCity()));
-          worldService.findPercentageOfPopulationInLargestCity("Netherlands");
+            worldService.find5SmallestDistrictsOfCity("Noord-Holland");
+            logger.info(String.valueOf(worldService.findCountryWithMostCity()));
+            worldService.findPercentageOfPopulationInLargestCity("Netherlands");
         };
     }
 

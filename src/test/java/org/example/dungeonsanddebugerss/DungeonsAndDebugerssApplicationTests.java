@@ -146,8 +146,10 @@ class DungeonsAndDebugerssApplicationTests {
         float expected = 4.609178f;
         float result = worldService.findPercentageOfPopulationInLargestCity("Netherlands");
         Assertions.assertEquals(expected, result);
-  @Test
-  void checkCountryWithNoHeadOfStateIsNotMoreThanOne() {
+    }
+
+    @Test
+    void checkCountryWithNoHeadOfStateIsNotMoreThanOne() {
         Assertions.assertEquals(1, worldService.findCountriesWithNoHeadOfState().size());
     }
 }
