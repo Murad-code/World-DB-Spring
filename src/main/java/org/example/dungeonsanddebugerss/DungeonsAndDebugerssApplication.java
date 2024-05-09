@@ -20,5 +20,12 @@ public class DungeonsAndDebugerssApplication {
         SpringApplication.run(DungeonsAndDebugerssApplication.class, args);
     }
 
+    @Bean
+    public CommandLineRunner runner(WorldService worldService){
+       return args -> {
+           worldService.findPercentageOfPopulationInLargestCity("Netherlands");
+       };
+    }
+
 
 }

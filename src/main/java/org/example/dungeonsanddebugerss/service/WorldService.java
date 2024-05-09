@@ -32,6 +32,7 @@ public class WorldService {
     }
 
     public List<CountryEntity> findCountriesWithNoHeadOfState() {
+        return null;
     }
 
     public float findPercentageOfPopulationInLargestCity(String countryName) {
@@ -74,15 +75,19 @@ public class WorldService {
     }
 
     public List<CountryEntity> findCountryWithMostCity() {
+        return null;
     }
 
     public int returnCountOfCitiesInCountry() {
+        return 0;
     }
 
     public List<CityEntity> find5SmallestDistrictsOfCity() {
+        return null;
     }
 
     public int findCountOfMostPopularLanguage(String countryName) {
+        return 0;
     }
 
 
