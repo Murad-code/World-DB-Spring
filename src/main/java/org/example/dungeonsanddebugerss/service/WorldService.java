@@ -29,30 +29,22 @@ public class WorldService {
     }
 
     public List<CountryEntity> findCountriesWithNoHeadOfState() {
-        return null;
     }
 
 
     public float findPercentageOfPopulationInLargestCity(String countryName) {
-        return 0f;
     }
 
     public List<CountryEntity> findCountryWithMostCity() {
-        return null;
     }
 
     public int returnCountOfCitiesInCountry() {
-        return 0;
     }
 
     public List<CityEntity> find5SmallestDistrictsOfCity() {
-        return null;
     }
-    // For a given country, approximately how many people speak its most popular official language?
+
     public int findCountOfMostPopularLanguage(String countryName) {
-        // Get the country code
-        // Get total population
-        // Find highest percentage and convert to int
         int totalPopulation;
         String countryCode;
 
