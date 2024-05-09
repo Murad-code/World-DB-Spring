@@ -17,7 +17,7 @@ class DungeonsAndDebugerssApplicationTests {
     @Test
     void contextLoads() {
     }
-
+  
     @Nested
     class testingFindCountOfMostPopularLanguage{
         @Test
@@ -47,4 +47,13 @@ class DungeonsAndDebugerssApplicationTests {
 
     }
 
+    @Test
+    void checkCountryWithNoHeadOfStateIsCalledSanMarino() {
+        Assertions.assertEquals("San Marino", worldService.findCountriesWithNoHeadOfState().getFirst().getName());
+    }
+
+    @Test
+    void checkCountryWithNoHeadOfStateIsNotMoreThanOne() {
+        Assertions.assertEquals(1, worldService.findCountriesWithNoHeadOfState().size());
+    }
 }
