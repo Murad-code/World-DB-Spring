@@ -2,10 +2,6 @@
 World-DB-Spring 'Dungeons and Debuggerss' consisting of Imogen, Murad, Selam, Irina, Howard, Patryk and Phoenix 👋.
 
 ## Project Overview
-This project creates a Java application that takes a CSV file which contains a List of Employees and their relevant personal details
-and stores the data in a MYSQL database. Additionally, the application has built in functionality that can identify and remove 
-corrupted data in the file automatically, as well as the capability to allow for the user to create, update and remove specific employees.
-
 This project creates a Java applicaiton that uses an SQL database which contains a list of countries and cities, along with other details.
 This applicaiton allows users to query certain fields within the database, while following the spring architecture layout: Entities->Repository->Service 
 
