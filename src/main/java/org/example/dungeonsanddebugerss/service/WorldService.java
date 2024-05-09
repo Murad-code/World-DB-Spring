@@ -4,15 +4,11 @@ import org.example.dungeonsanddebugerss.entities.CityEntity;
 import org.example.dungeonsanddebugerss.entities.CountryEntity;
 
 import org.example.dungeonsanddebugerss.entities.CountrylanguageEntity;
-import org.example.dungeonsanddebugerss.entities.CountrylanguageEntityId;
 import org.example.dungeonsanddebugerss.respositories.CityEntityRepository;
 import org.example.dungeonsanddebugerss.respositories.CountryEntityRepository;
 import org.example.dungeonsanddebugerss.respositories.CountrylanguageEntityRepository;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Collections;
 import java.util.Comparator;
-
 import java.util.logging.Logger;
 
 
@@ -41,7 +36,7 @@ public class WorldService {
         this.countrylanguageEntityRepository = countrylanguageEntityRepository;
     }
 
-    public static List<CityEntity> find5SmallestDistrictsOfCity(String city) {
+    public List<CityEntity> find5SmallestDistrictsOfCity(String city) {
         List<CityEntity> cityEntities = cityEntityRepository.findAll();
         ArrayList<CityEntity> lowest = new ArrayList<>();
 
@@ -111,6 +106,7 @@ public class WorldService {
              }
          }
          return countryCodeCount;
+    }
 
     public List<CountryEntity> findCountriesWithNoHeadOfState() {
         logger.info("Starting findCountriesWithNoHeadOfState method");
@@ -131,21 +127,17 @@ public class WorldService {
     }
 
 
-    public float findPercentageOfPopulationInLargestCity(String countryName) {
-    }
 
-    public List<CountryEntity> findCountryWithMostCity() {
-    }
 
     public int returnCountOfCitiesInCountry() {
+        return 0;
     }
 
-    public List<CityEntity> find5SmallestDistrictsOfCity() {
-    }
 
-    public int findCountOfMostPopularLanguage(String countryName) {
-        int totalPopulation;
-        String countryCode;
+
+    public int findCountOfMostPopularLanguage(String countryName){
+            int totalPopulation;
+            String countryCode;
 
         CountryEntity country = findCountry(countryName);
         if(country != null){

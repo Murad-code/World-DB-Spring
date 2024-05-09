@@ -115,9 +115,6 @@ class DungeonsAndDebugerssApplicationTests {
         Mockito.when(cityEntityRepository.findAll()).thenReturn(cityEntities);
 
 
-        WorldService worldService = new WorldService(cityEntityRepository, null, null);
-
-
         List<CityEntity> result = worldService.find5SmallestDistrictsOfCity("District1");
 
         assertEquals(5, result.size());
