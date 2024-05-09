@@ -128,9 +128,9 @@ public class WorldService {
         for (Map.Entry<CountryEntity, Integer> countryEntry : countryCityMap.entrySet()) {
             if (countryEntry.getValue() >= maxCityCount) {
                 countryWithMostCities.add(countryEntry.getKey());
+        logger.info("The country with most cities is " + countryWithMostCities);
             }
         }
-        logger.info("The country with most cities is " + countryWithMostCities);
         return countryWithMostCities;
 
     }
@@ -149,7 +149,23 @@ public class WorldService {
     }
 
     public int returnNumOfCities(){
-        return 1;
+        ArrayList<CityEntity>  citiesInCountry = new ArrayList<>();
+        List<CountryEntity> countryWithMostCities = findCountryWithMostCity();
+        logger.info("Country with most cities is " + countryWithMostCities);
+        String countryCode = countryWithMostCities.getFirst().getCode();
+        logger.info("Country code for country with most cities is " + countryCode);
+
+         List<CityEntity> cityList = cityEntityRepository.findAll();
+          for(CityEntity city: cityList){
+              if(city.getCountryCode().getCode().equals(countryCode)){
+                  logger.info("City in country with most cities is " + city.getName());
+                  citiesInCountry.add(city);
+
+              }
+
+          }
+
+        return citiesInCountry.size();
     }
 
     public List<CountryEntity> findCountriesWithNoHeadOfState() {
