@@ -152,4 +152,19 @@ class DungeonsAndDebugerssApplicationTests {
     void checkCountryWithNoHeadOfStateIsNotMoreThanOne() {
         Assertions.assertEquals(1, worldService.findCountriesWithNoHeadOfState().size());
     }
+    @Nested
+    class findCountryWithMostCitiesTests {
+        @Test
+        void checkCountryWithMostCitiesReturnsChina() {
+            Assertions.assertEquals("China", worldService.findCountryWithMostCity().getFirst().getName());
+        }
+
+
+        @Test
+        void checkCountryWithMostCitiesListsIsNotMoreThanOne() {
+            Assertions.assertEquals(1, worldService.findCountryWithMostCity().size());
+
+
+        }
+    }
 }
