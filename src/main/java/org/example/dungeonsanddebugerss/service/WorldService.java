@@ -11,10 +11,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 @Service
 public class WorldService {
+
+    private static final Logger logger = Logger.getLogger(WorldService.class.getName());
 
     private static CityEntityRepository cityEntityRepository;
     private CountryEntityRepository countryEntityRepository;
@@ -66,7 +69,7 @@ public class WorldService {
 
         for (int i = 0; i < top5Cities.size(); i++) {
             CityEntity cities = top5Cities.get(i);
-            System.out.println("City " + (i+1) + ": " + cities.getName() + ", Population: " + cities.getPopulation());
+            logger.info("City " + (i+1) + ": " + cities.getName() + ", Population: " + cities.getPopulation());
         }
 
         return top5Cities;
