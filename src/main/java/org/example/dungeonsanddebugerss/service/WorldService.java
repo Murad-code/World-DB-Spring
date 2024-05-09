@@ -9,6 +9,7 @@ import org.example.dungeonsanddebugerss.respositories.CountrylanguageEntityRepos
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 
 @Service
@@ -24,6 +25,32 @@ public class WorldService {
         this.countryEntityRepository = countryEntityRepository;
         this.countrylanguageEntityRepository = countrylanguageEntityRepository;
     }
+
+    public List<CountryEntity> findCountriesWithNoHeadOfState() {
+
+    }
+
+
+    public float findPercentageOfPopulationInLargestCity(String countryName) {
+
+    }
+
+    public List<CountryEntity> findCountryWithMostCity() {
+
+    }
+
+    public int returnCountOfCitiesInCountry() {
+
+    }
+
+    public List<CityEntity> find5SmallestDistrictsOfCity() {
+
+    }
+
+    public int findCountOfMostPopularLanguage(String countryName) {
+
+    }
+
 
 
 }
