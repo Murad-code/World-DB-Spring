@@ -1,13 +1,24 @@
 ## employee-sql-dao
-Employee-sql-dao is a group project by 'The Jaav Mahal' consisting of Imogen, Murad, Oliver, Patrick, Patryk and Phoenix 👋.
+World-DB-Spring 'Dungeons and Debuggerss' consisting of Imogen, Murad, Selam, Irina, Howard, Patryk and Phoenix 👋.
 
 ## Project Overview
 This project creates a Java application that takes a CSV file which contains a List of Employees and their relevant personal details
 and stores the data in a MYSQL database. Additionally, the application has built in functionality that can identify and remove 
 corrupted data in the file automatically, as well as the capability to allow for the user to create, update and remove specific employees.
 
-## Dependencies
+This project creates a Java applicaiton that uses an SQL database which contains a list of countries and cities, along with other details.
+This applicaiton allows users to query certain fields within the database, while following the spring architecture layout: Entities->Repository->Service 
 
+## Acceptance Criteria
+- Interact with the MySQL World Database
+- Use Spring JPA to connect and communicate with the Database
+- Use basic CRUD operations
+- Provide multiple types of search methods
+- Implement the service layer in your application
+- Use WebMVCTests to ensure your repositories work correctly
+
+
+## Dependencies
 JDK 21, JUnit, Mockito
 
 
@@ -23,34 +34,28 @@ Setup: Ensure you have Java installed on your system.
 
 ## How to use the Program 
 
-Open the project directory: "TheJaavMahal" and open the class "App". Ensure that the init function has been called on the Parser and DatabasePopulator, this should come before use of the CRUD methods.
+Open the project directory: "Dungeons and Debuggerss" and open the class "App". Ensure the spring boot application is running:
 
 ```
-    Parser.init();
-    DatabasePopulator.init();
+  public static void main(String[] args) {
+        SpringApplication.run(DungeonsAndDebugerssApplication.class, args);
+    }
+```
+Within the main method you can query the SQL database withthe following methods within the bean. Comment out the methods you dont require.
+```
+            logger.info(String.valueOf(worldService.findCountryWithMostCity()));
+            List<CityEntity> result = worldService.find5SmallestDistrictsOfCity("Noord-Holland");
+            logger.info(String.valueOf(worldService.returnNumOfCities()));
+            logger.info(String.valueOf(result));
+            logger.info(cityService.getAllCities().toString());
+            logger.info(countryService.getCountryByCode("ABW").toString());
+            logger.info(countrylanguageService.getAllCountryLanguages().toString());
 ```
 
-Within the main method you can access the data with the following queries:
-```
-    EmployeeDAO.queryFromField("employee_id", 114577);    
-    EmployeeDAO.updateEmployee(192501, "middle_initial", "I");
-    EmployeeDAO.createEmployee(employee);
-    EmployeeDAO.deleteEmployeeFromFieldWithValue("employee_id", 114577);
-```
 You can use any combination or frequency of these methods, and by running the program the results of each search will be shown in the console.
-
-For each run of App, there will be a recorded file of the results named SearchResult-YYYY-MM-DD---hh-mm-ss.txt. These can be found in the resources (src/main/resources) folder.
 
 To enhance maintainability we created logging functionality using java.util.logging. Our colour-coded logger allows you to easily track the flow of the program, record the state when an important event happens and capture errors or exceptions that occur during runtime. This can be used through the Log class and it's static methods.
 
-##  
-
-## Acceptance Criteria
-- Read the csv file using File I/O and parse the data into a suitable data structure.
-- Parse the data correctly, ignoring the records that have corrupted data
-- Have a DAO class that performs crud operations on the data
-- Store data to database
-- Inform the user of how many employee records are corrupted using a suitable logging mechanism.
 
 ##  
 
