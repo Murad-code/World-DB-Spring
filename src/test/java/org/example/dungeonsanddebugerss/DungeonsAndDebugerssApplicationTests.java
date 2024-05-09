@@ -69,8 +69,6 @@ class DungeonsAndDebugerssApplicationTests {
     @Test
     @DisplayName("Testing that 5 lowest cities are returned")
     void checkFivesCitiesWithLowestPopulationAreReturned(){
-
-
         List<CityEntity> result = worldService.find5SmallestDistrictsOfCity("Zuid-Holland");
 
         assertEquals(5, result.size());
