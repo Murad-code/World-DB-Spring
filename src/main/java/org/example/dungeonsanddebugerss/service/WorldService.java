@@ -148,6 +148,10 @@ public class WorldService {
          return countryCodeCount;
     }
 
+    public int returnNumOfCities(){
+        return 1;
+    }
+
     public List<CountryEntity> findCountriesWithNoHeadOfState() {
         logger.info("Starting findCountriesWithNoHeadOfState method");
         List<CountryEntity> allCountries = countryEntityRepository.findAll();
