@@ -1,4 +1,4 @@
-## employee-sql-dao
+## World-DB-Spring
 World-DB-Spring 'Dungeons and Debuggerss' consisting of Imogen, Murad, Selam, Irina, Howard, Patryk and Phoenix 👋.
 
 ## Project Overview
