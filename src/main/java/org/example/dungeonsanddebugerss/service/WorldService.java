@@ -20,8 +20,7 @@ import java.util.stream.Stream;
 
 @Service
 public class WorldService {
-
-    private static final org.slf4j.Logger log = LoggerFactory.getLogger(WorldService.class);
+    
     private final Logger logger = Logger.getLogger("Spring Logger");
     private final CountryService countryService;
 
