@@ -27,14 +27,14 @@ public class DungeonsAndDebugerssApplication {
     @Bean
     public CommandLineRunner runner(WorldService worldService, CityService cityService, CountryService countryService, CountrylanguageService countrylanguageService) {
         return args -> {
-//            logger.info(String.valueOf(worldService.findCountryWithMostCity()));
-//            List<CityEntity> result = worldService.find5SmallestDistrictsOfCity("Noord-Holland");
-//            logger.info(String.valueOf(worldService.returnNumOfCities()));
-//            logger.info(String.valueOf(result));
-//              logger.info(cityService.getAllCities().toString());
-//              logger.info(countryService.getCountryByCode("ABW").toString());
-//              logger.info(countrylanguageService.getAllCountryLanguages().toString());
-
+//            logger.info("Countries with no head of state: " + worldService.findCountriesWithNoHeadOfState());
+//            logger.info("Percentage of population in the largest city at Netherlands: " + worldService.findPercentageOfPopulationInLargestCity("Netherlands"));
+//            logger.info("5 Smallest districts of the city Noord-Holland: " + worldService.find5SmallestDistrictsOfCity("Noord-Holland"));
+//            logger.info("The number of people who speaks the most popular official language of South Korea is: " + worldService.findCountOfMostPopularLanguage("South Korea"));
+//            logger.info("Country with the most cities: " + worldService.findCountryWithMostCity() + " with " + worldService.returnNumOfCities() + " cities");
+//            logger.info(cityService.getAllCities().toString());
+//            logger.info(countryService.getCountryByCode("ABW").toString());
+//            logger.info(countrylanguageService.getAllCountryLanguages().toString());
         };
     }
 
