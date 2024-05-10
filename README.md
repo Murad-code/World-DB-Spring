@@ -11,11 +11,10 @@ This applicaiton allows users to query certain fields within the database, while
 - Use basic CRUD operations
 - Provide multiple types of search methods
 - Implement the service layer in your application
-- Use WebMVCTests to ensure your repositories work correctly
 
 
 ## Dependencies
-JDK 21, JUnit, Mockito
+JDK 21, JUnit, Mockito, SpringBoot
 
 
 ## How to Use the Project 
