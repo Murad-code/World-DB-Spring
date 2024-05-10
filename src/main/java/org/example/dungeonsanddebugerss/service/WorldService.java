@@ -10,6 +10,7 @@ import org.example.dungeonsanddebugerss.respositories.CountryEntityRepository;
 import org.example.dungeonsanddebugerss.respositories.CountrylanguageEntityRepository;
 
 
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -20,6 +21,7 @@ import java.util.stream.Stream;
 @Service
 public class WorldService {
 
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(WorldService.class);
     private final Logger logger = Logger.getLogger("Spring Logger");
     private final CountryService countryService;
 
@@ -44,7 +46,7 @@ public class WorldService {
             if(countryName.equals(c.getName()))
             {
                 countryPopTotal = c.getPopulation();
-                //logger.info("Country: " + c.getName() + " | Population: " + countryPopTotal);
+                logger.info("Country: " + c.getName() + " | Population: " + countryPopTotal);
                 countryCode = c.getCode();
             }
         }
@@ -66,8 +68,8 @@ public class WorldService {
             }
             float result = (float) highestPop / countryPopTotal;
             result *= 100;
-            //logger.info("Highest city pop: " + highestPopCityName + " | Population: " + highestPop);
-            //logger.info("Percentage: " + result);
+            logger.info("Highest city pop: " + highestPopCityName + " | Population: " + highestPop);
+            logger.info("Percentage: " + result);
             return result;
         }
         return 0;
@@ -90,7 +92,7 @@ public class WorldService {
 
         for (int i = 0; i < top5Cities.size(); i++) {
             CityEntity cities = top5Cities.get(i);
-            //logger.info("City " + (i+1) + ": " + cities.getName() + ", Population: " + cities.getPopulation());
+            logger.info("City " + (i+1) + ": " + cities.getName() + ", Population: " + cities.getPopulation());
         }
 
         return top5Cities;
@@ -119,44 +121,13 @@ public class WorldService {
         return countries;
     }
 
-//    public List<CountryEntity> findCountryWithMostCity() {
-//        Map<CountryEntity, Integer> countryCityMap = new HashMap<>();
-//        List<CountryEntity> countryList = countryEntityRepository.findAll();
-//          //logger.info("Starting to go through countryList...");
-//        for (CountryEntity country: countryList) {
-////          logger.info("Country: " + country.getName());
-//            String countryCode = country.getCode();
-////            logger.info("Country Code: " + countryCode);
-//            int cityCount = countByCountryCode(countryCode);
-////            logger.info("Country code {} has {} cities", countryCode, cityCount);
-//            countryCityMap.put(country, cityCount);
-//        }
-//
-//        int maxCityCount = 0;
-//        for (int cityCount : countryCityMap.values()) {
-//            if (cityCount > maxCityCount) {
-//                maxCityCount = cityCount;
-//            }
-//        }
-//
-//        List<CountryEntity> countryWithMostCities = new ArrayList<>();
-//        for (Map.Entry<CountryEntity, Integer> countryEntry : countryCityMap.entrySet()) {
-//            if (countryEntry.getValue() >= maxCityCount) {
-//                countryWithMostCities.add(countryEntry.getKey());
-//        //logger.info("The country with most cities is " + countryWithMostCities);
-//            }
-//        }
-//        return countryWithMostCities;
-//
-//    }
-
     private int countByCountryCode(String countryCode){
          int countryCodeCount = 0;
         List<CityEntity> cityList = cityEntityRepository.findAll();
          for(CityEntity city : cityList ){
-//             logger.info("City : {}", city.getName());
+             logger.info("City : " + city.getName());
              if(city.getCountryCode().getCode().equals(countryCode)){
-//                 logger.info("Country Code : {}", city.getCountryCode().getCode());
+                 logger.info("Country Code : " + city.getCountryCode().getCode());
                  countryCodeCount++;
              }
          }
@@ -166,14 +137,14 @@ public class WorldService {
     public int returnNumOfCities(){
         ArrayList<CityEntity>  citiesInCountry = new ArrayList<>();
         List<CountryEntity> countryWithMostCities = findCountryWithMostCity();
-        //logger.info("Country with most cities is " + countryWithMostCities);
+        logger.info("Country with most cities is " + countryWithMostCities);
         String countryCode = countryWithMostCities.getFirst().getCode();
-        //logger.info("Country code for country with most cities is " + countryCode);
+        logger.info("Country code for country with most cities is " + countryCode);
 
          List<CityEntity> cityList = cityEntityRepository.findAll();
           for(CityEntity city: cityList){
               if(city.getCountryCode().getCode().equals(countryCode)){
-                  //logger.info("City in country with most cities is " + city.getName());
+                  logger.info("City in country with most cities is " + city.getName());
                   citiesInCountry.add(city);
 
               }
@@ -184,34 +155,36 @@ public class WorldService {
     }
 
     public List<CountryEntity> findCountriesWithNoHeadOfState() {
-        //logger.info("Starting findCountriesWithNoHeadOfState method");
+        logger.info("Starting findCountriesWithNoHeadOfState method");
         List<CountryEntity> allCountries = countryEntityRepository.findAll();
-        //logger.fine("Collected all countries");
+        logger.fine("Collected all countries");
         List<CountryEntity> noHeadOfStateCountries = new ArrayList<>();
-        //logger.fine("Looping through countries to find no head of state");
+        logger.fine("Looping through countries to find no head of state");
         for (CountryEntity countryEntity : allCountries) {
             if (countryEntity.getHeadOfState() == null) {
-                //logger.finer("Found no head of state, adding country to return list");
+                logger.finer("Found no head of state, adding country to return list");
                 noHeadOfStateCountries.add(countryEntity);
             }
         }
 
-        //logger.info("Finished findCountriesWithNoHeadOfState method");
+        logger.info("Finished findCountriesWithNoHeadOfState method");
         return noHeadOfStateCountries;
     }
 
     public int findCountOfMostPopularLanguage(String countryName){
             int totalPopulation;
             String countryCode;
-
+        logger.info("Finding the country");
         CountryEntity country = findCountry(countryName);
         if(country != null){
+            logger.fine("Country found");
             countryCode = country.getCode();
             totalPopulation = country.getPopulation();
         }else{
+            logger.warning("Country not found");
             return -1;
         }
-
+        logger.info("Getting number of people who speaks each official language");
         ArrayList<Integer> peopleWhoSpeakLanguage = new ArrayList<Integer>();
         for(CountrylanguageEntity language : getAllLanguageCountrySpeaks(countryCode)){
             if(language.getIsOfficial().equals("T")){
@@ -220,6 +193,7 @@ public class WorldService {
         }
 
         if(peopleWhoSpeakLanguage.isEmpty()){
+            logger.info("No official language exists for this country");
             return -1;
         }
 
