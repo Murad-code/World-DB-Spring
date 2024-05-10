@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 
 @Service
 public class WorldService {
-    
+
     private final Logger logger = Logger.getLogger("Spring Logger");
     private final CountryService countryService;
 
@@ -118,19 +118,6 @@ public class WorldService {
         List<CountryEntity> countries = new ArrayList<>();
         country.ifPresent(countries::add);
         return countries;
-    }
-
-    private int countByCountryCode(String countryCode){
-         int countryCodeCount = 0;
-        List<CityEntity> cityList = cityEntityRepository.findAll();
-         for(CityEntity city : cityList ){
-             logger.info("City : " + city.getName());
-             if(city.getCountryCode().getCode().equals(countryCode)){
-                 logger.info("Country Code : " + city.getCountryCode().getCode());
-                 countryCodeCount++;
-             }
-         }
-         return countryCodeCount;
     }
 
     public int returnNumOfCities(){
