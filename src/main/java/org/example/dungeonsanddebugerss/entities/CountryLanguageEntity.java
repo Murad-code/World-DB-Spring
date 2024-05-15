@@ -8,9 +8,9 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "countrylanguage")
-public class CountrylanguageEntity {
+public class CountryLanguageEntity {
     @EmbeddedId
-    private CountrylanguageEntityId id;
+    private CountryLanguageEntityId id;
 
     @MapsId("countryCode")
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -29,11 +29,11 @@ public class CountrylanguageEntity {
     @Column(name = "Percentage", nullable = false, precision = 4, scale = 1)
     private BigDecimal percentage;
 
-    public CountrylanguageEntityId getId() {
+    public CountryLanguageEntityId getId() {
         return id;
     }
 
-    public void setId(CountrylanguageEntityId id) {
+    public void setId(CountryLanguageEntityId id) {
         this.id = id;
     }
 

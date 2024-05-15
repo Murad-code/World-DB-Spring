@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class CountrylanguageEntityId implements Serializable {
+public class CountryLanguageEntityId implements Serializable {
     private static final long serialVersionUID = 8912775694415271724L;
     @Size(max = 3)
     @NotNull
@@ -45,7 +45,7 @@ public class CountrylanguageEntityId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        CountrylanguageEntityId entity = (CountrylanguageEntityId) o;
+        CountryLanguageEntityId entity = (CountryLanguageEntityId) o;
         return Objects.equals(this.countryCode, entity.countryCode) &&
                 Objects.equals(this.language, entity.language);
     }
