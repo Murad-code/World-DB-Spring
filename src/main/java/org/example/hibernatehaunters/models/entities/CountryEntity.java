@@ -1,4 +1,4 @@
-package org.example.dungeonsanddebugerss.entities;
+package org.example.hibernatehaunters.models.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

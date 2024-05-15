@@ -1,13 +1,12 @@
-package org.example.dungeonsanddebugerss.service;
+package org.example.hibernatehaunters.service;
 
-import org.antlr.v4.runtime.misc.LogManager;
-import org.example.dungeonsanddebugerss.entities.CityEntity;
-import org.example.dungeonsanddebugerss.entities.CountryEntity;
+import org.example.hibernatehaunters.models.entities.CityEntity;
+import org.example.hibernatehaunters.models.entities.CountryEntity;
 
-import org.example.dungeonsanddebugerss.entities.CountrylanguageEntity;
-import org.example.dungeonsanddebugerss.respositories.CityEntityRepository;
-import org.example.dungeonsanddebugerss.respositories.CountryEntityRepository;
-import org.example.dungeonsanddebugerss.respositories.CountrylanguageEntityRepository;
+import org.example.hibernatehaunters.models.entities.CountrylanguageEntity;
+import org.example.hibernatehaunters.models.respositories.CityEntityRepository;
+import org.example.hibernatehaunters.models.respositories.CountryEntityRepository;
+import org.example.hibernatehaunters.models.respositories.CountrylanguageEntityRepository;
 
 
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 import java.util.Map;
 import java.util.Collections;
 import java.util.Comparator;

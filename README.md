@@ -1,5 +1,5 @@
 ## employee-sql-dao
-World-DB-Spring 'Dungeons and Debuggerss' consisting of Imogen, Murad, Selam, Irina, Howard, Patryk and Phoenix 👋.
+World-DB-Spring 'Hibernate Haunters' consisting of Imogen, Murad, Selam, Irina, Howard, Patryk and Phoenix 👋.
 
 ## Project Overview
 This project creates a Java applicaiton that uses an SQL database which contains a list of countries and cities, along with other details.
@@ -29,11 +29,11 @@ Setup: Ensure you have Java installed on your system.
 
 ## How to use the Program 
 
-Open the project directory: "Dungeons and Debuggerss" and open the class "App". Ensure the spring boot application is running:
+Open the project directory: "Hibernate Haunters" and open the class "App". Ensure the spring boot application is running:
 
 ```
   public static void main(String[] args) {
-        SpringApplication.run(DungeonsAndDebugerssApplication.class, args);
+        SpringApplication.run(HibernateHauntersApplication.class, args);
     }
 ```
 Within the main method you can query the SQL database withthe following methods within the bean. Comment out the methods you dont require.

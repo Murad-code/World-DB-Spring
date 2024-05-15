@@ -1,8 +1,8 @@
-package org.example.dungeonsanddebugerss.service;
+package org.example.hibernatehaunters.service;
 
-import org.example.dungeonsanddebugerss.entities.CountrylanguageEntity;
-import org.example.dungeonsanddebugerss.entities.CountrylanguageEntityId;
-import org.example.dungeonsanddebugerss.respositories.CountrylanguageEntityRepository;
+import org.example.hibernatehaunters.models.entities.CountrylanguageEntity;
+import org.example.hibernatehaunters.models.entities.CountrylanguageEntityId;
+import org.example.hibernatehaunters.models.respositories.CountrylanguageEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

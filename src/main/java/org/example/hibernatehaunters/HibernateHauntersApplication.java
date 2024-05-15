@@ -1,10 +1,9 @@
-package org.example.dungeonsanddebugerss;
+package org.example.hibernatehaunters;
 
-import org.example.dungeonsanddebugerss.entities.CityEntity;
-import org.example.dungeonsanddebugerss.service.CityService;
-import org.example.dungeonsanddebugerss.service.CountryService;
-import org.example.dungeonsanddebugerss.service.CountrylanguageService;
-import org.example.dungeonsanddebugerss.service.WorldService;
+import org.example.hibernatehaunters.service.CityService;
+import org.example.hibernatehaunters.service.CountryService;
+import org.example.hibernatehaunters.service.CountrylanguageService;
+import org.example.hibernatehaunters.service.WorldService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,16 +11,14 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.logging.Logger;
 
-import java.util.List;
-
 
 @SpringBootApplication
-public class DungeonsAndDebugerssApplication {
+public class HibernateHauntersApplication {
 
     private static final Logger logger = Logger.getLogger("Spring Logger");
 
     public static void main(String[] args) {
-        SpringApplication.run(DungeonsAndDebugerssApplication.class, args);
+        SpringApplication.run(HibernateHauntersApplication.class, args);
     }
 
     @Bean
