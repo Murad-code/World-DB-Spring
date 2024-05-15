@@ -3,10 +3,10 @@ package org.example.hibernatehaunters.service;
 import org.example.hibernatehaunters.models.entities.CityEntity;
 import org.example.hibernatehaunters.models.entities.CountryEntity;
 
-import org.example.hibernatehaunters.models.entities.CountrylanguageEntity;
+import org.example.hibernatehaunters.models.entities.CountryLanguageEntity;
 import org.example.hibernatehaunters.models.respositories.CityEntityRepository;
 import org.example.hibernatehaunters.models.respositories.CountryEntityRepository;
-import org.example.hibernatehaunters.models.respositories.CountrylanguageEntityRepository;
+import org.example.hibernatehaunters.models.respositories.CountryLanguageEntityRepository;
 
 
 import org.springframework.stereotype.Service;
@@ -27,9 +27,9 @@ public class WorldService {
 
     private CityEntityRepository cityEntityRepository;
     private CountryEntityRepository countryEntityRepository;
-    private CountrylanguageEntityRepository countrylanguageEntityRepository;
+    private CountryLanguageEntityRepository countrylanguageEntityRepository;
 
-    public WorldService(CityEntityRepository cityEntityRepository, CountryEntityRepository countryEntityRepository, CountrylanguageEntityRepository countrylanguageEntityRepository) {
+    public WorldService(CityEntityRepository cityEntityRepository, CountryEntityRepository countryEntityRepository, CountryLanguageEntityRepository countrylanguageEntityRepository) {
         this.cityEntityRepository = cityEntityRepository;
         this.countryEntityRepository = countryEntityRepository;
         this.countrylanguageEntityRepository = countrylanguageEntityRepository;
@@ -192,7 +192,7 @@ public class WorldService {
         }
 
         ArrayList<Integer> peopleWhoSpeakLanguage = new ArrayList<Integer>();
-        for(CountrylanguageEntity language : getAllLanguageCountrySpeaks(countryCode)){
+        for(CountryLanguageEntity language : getAllLanguageCountrySpeaks(countryCode)){
             if(language.getIsOfficial().equals("T")){
                 peopleWhoSpeakLanguage.add(Math.round(totalPopulation * (language.getPercentage().floatValue()/100)));
             }
@@ -206,7 +206,7 @@ public class WorldService {
         return peopleWhoSpeakLanguage.getLast();
     }
 
-    public CountryEntity findCountry(String countryName){
+    private CountryEntity findCountry(String countryName){
         for(CountryEntity country : countryEntityRepository.findAll()) {
             if(country.getName().equals(countryName)) {
                 return country;
@@ -215,9 +215,9 @@ public class WorldService {
         return null;
     }
 
-    private List<CountrylanguageEntity> getAllLanguageCountrySpeaks(String countryCode){
-        List<CountrylanguageEntity> countries = new ArrayList<>();
-        for(CountrylanguageEntity countrylanguageEntity : countrylanguageEntityRepository.findAll()){
+    private List<CountryLanguageEntity> getAllLanguageCountrySpeaks(String countryCode){
+        List<CountryLanguageEntity> countries = new ArrayList<>();
+        for(CountryLanguageEntity countrylanguageEntity : countrylanguageEntityRepository.findAll()){
             if(countrylanguageEntity.getCountryCode().getCode().equals(countryCode)){
                 countries.add(countrylanguageEntity);
             }
