@@ -206,7 +206,7 @@ public class WorldService {
         return peopleWhoSpeakLanguage.getLast();
     }
 
-    private CountryEntity findCountry(String countryName){
+    public CountryEntity findCountry(String countryName){
         for(CountryEntity country : countryEntityRepository.findAll()) {
             if(country.getName().equals(countryName)) {
                 return country;
