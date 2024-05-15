@@ -23,18 +23,6 @@ public class DungeonsAndDebugerssApplication {
         SpringApplication.run(DungeonsAndDebugerssApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner runner(WorldService worldService, CityService cityService, CountryService countryService, CountryLanguageService countrylanguageService) {
-        return args -> {
-            logger.info(String.valueOf(worldService.findCountryWithMostCity()));
-            List<CityEntity> result = worldService.find5SmallestDistrictsOfCity("Noord-Holland");
-            logger.info(String.valueOf(worldService.returnNumOfCities()));
-            logger.info(String.valueOf(result));
-              logger.info(cityService.getAllCities().toString());
-              logger.info(countryService.getCountryByCode("ABW").toString());
-              logger.info(countrylanguageService.getAllCountryLanguages().toString());
 
-        };
     }
 
-}
