@@ -27,19 +27,24 @@ public class CountryLanguageService {
     }
 
     public List<CountryLanguageEntity> getCountryLanguageByCountryCode(String countryCode) {
-        return countrylanguageEntityRepository.findAllCountrylanguageById_CountryCode(countryCode);
+        return countrylanguageEntityRepository.findAllCountryLanguageById_CountryCode(countryCode);
 
     }
 
     public List<CountryLanguageEntity> getCountryLanguageByLanguage(String language){
-        return countrylanguageEntityRepository.findAllCountrylanguageById_Language(language);
+        return countrylanguageEntityRepository.findAllCountryLanguageById_Language(language);
+    }
+
+    public CountryLanguageEntity getCountryLanguageById(CountryLanguageIdEntity id)
+    {
+        return countrylanguageEntityRepository.findCountryLanguageEntityById(id);
     }
 
     public CountryLanguageEntity updateCountryLanguage(CountryLanguageIdEntity id, CountryLanguageEntity updatedCountryLanguage) {
         Optional<CountryLanguageEntity> countryLanguageOptional = countrylanguageEntityRepository.findById(id);
         if (countryLanguageOptional.isPresent()) {
             CountryLanguageEntity existingCountryLanguage = countryLanguageOptional.get();
-            existingCountryLanguage.setCountryCode(updatedCountryLanguage.getCountryCode());
+            //existingCountryLanguage.setCountryCode(updatedCountryLanguage.getCountryCode());
             existingCountryLanguage.setIsOfficial(updatedCountryLanguage.getIsOfficial());
             existingCountryLanguage.setPercentage(updatedCountryLanguage.getPercentage());
 

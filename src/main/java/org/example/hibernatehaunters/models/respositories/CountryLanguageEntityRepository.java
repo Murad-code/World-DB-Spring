@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface CountryLanguageEntityRepository extends JpaRepository<CountryLanguageEntity, CountryLanguageIdEntity> {
 
-    List<CountryLanguageEntity> findAllCountrylanguageById_CountryCode(String countryCode);
-    List<CountryLanguageEntity> findAllCountrylanguageById_Language(String language);
+    List<CountryLanguageEntity> findAllCountryLanguageById_CountryCode(String countryCode);
+    List<CountryLanguageEntity> findAllCountryLanguageById_Language(String language);
+    CountryLanguageEntity findCountryLanguageEntityById(CountryLanguageIdEntity id);
 }

@@ -32,28 +32,16 @@ public class CountryLanguageController {
 
     //create
     @PostMapping("/countryLanguage/create")
-    public String addLanguage(@RequestBody CountryLanguageEntity countryLanguage){
+    public CountryLanguageEntity addLanguage(@RequestBody CountryLanguageEntity countryLanguage){
         countryLanguageService.createCountryLanguage(countryLanguage);
-        return "Language: " + countryLanguage.toString() + " has been created.";
+        return countryLanguage;
     }
-//THIS UPDATED CODE DOESN'T WORK
-    //update
-    @PutMapping("/countryLanguage/update/country")
-    public List<CountryLanguageEntity> updateByCountryCode(@RequestParam String code, @RequestBody CountryLanguageEntity countryLanguage){
-        List<CountryLanguageEntity> countryLanguagesUpdated = countryLanguageService.getCountryLanguageByCountryCode(code);
-        for(CountryLanguageEntity ce : countryLanguagesUpdated){
-            countryLanguageService.updateCountryLanguage(ce.getId(), ce);
-        }
-        return countryLanguagesUpdated;
-    }
-    //update
-    @PutMapping("/countryLanguage/update/language")
-    public List<CountryLanguageEntity> updateByLanguage(@RequestParam String name, @RequestBody CountryLanguageEntity countryLanguage){
-        List<CountryLanguageEntity> countryLanguagesUpdated = countryLanguageService.getCountryLanguageByLanguage(name);
-        for(CountryLanguageEntity ce : countryLanguagesUpdated){
-            countryLanguageService.updateCountryLanguage(ce.getId(), ce);
-        }
-        return countryLanguagesUpdated;
+
+    @PutMapping("/countryLanguage/update/official")
+    public CountryLanguageEntity updateLanguageIsOfficial(@RequestBody CountryLanguageEntity countryLanguage){
+        CountryLanguageEntity countryLanguageUpdated = countryLanguageService.getCountryLanguageById(countryLanguage.getId());
+        countryLanguageService.updateCountryLanguage(countryLanguageUpdated.getId(), countryLanguage);
+        return countryLanguageUpdated;
     }
 
 
