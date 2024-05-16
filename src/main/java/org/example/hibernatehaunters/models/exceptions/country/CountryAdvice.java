@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -28,5 +29,14 @@ public class CountryAdvice {
         CountryErrorResponse response = new CountryErrorResponse(e.getMessage(), request.getRequestURL().toString(),  400);
         return ResponseEntity.badRequest().body(response);
     }
+
+
+    @ExceptionHandler(CountryBadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public String handleCountryBadRequestException(CountryBadRequestException ex) {
+        return ex.getMessage();
+    }
+
 
 }
