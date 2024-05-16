@@ -31,7 +31,7 @@ public class HibernateHauntersApplication {
 //            logger.info(String.valueOf(result));
 //            logger.info(cityService.getAllCities().toString());
 //            logger.info(countryService.getCountryByCode("ABW").toString());
-//            logger.info(countrylanguageService.getAllCountryLanguages().toString());
+//            logger.info(countrylanguageService.getAllCountryLanguages().toString())
         };
     }
 

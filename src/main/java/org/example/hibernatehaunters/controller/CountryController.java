@@ -4,7 +4,7 @@ import org.example.hibernatehaunters.models.entities.CityEntity;
 import org.example.hibernatehaunters.models.entities.CountryEntity;
 import org.example.hibernatehaunters.service.CityService;
 import org.example.hibernatehaunters.service.CountryService;
-import org.example.hibernatehaunters.service.CountrylanguageService;
+import org.example.hibernatehaunters.service.CountryLanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +18,13 @@ public class CountryController {
 
     private final CountryService countryService;
     private final CityService cityService;
-    private final CountrylanguageService countrylanguageService;
+    private final CountryLanguageService countryLanguageService;
 
     @Autowired
-    public CountryController(CountryService countryService, CityService cityService, CountrylanguageService countrylanguageService) {
+    public CountryController(CountryService countryService, CityService cityService, CountryLanguageService countryLanguageService) {
         this.countryService = countryService;
         this.cityService = cityService;
-        this.countrylanguageService = countrylanguageService;
+        this.countryLanguageService = countryLanguageService;
     }
 
 
@@ -63,7 +63,7 @@ public class CountryController {
         Optional<CountryEntity> countryToDelete = countryService.getCountryByCode(code);
         if (countryToDelete.isPresent()) {
             cityService.deleteCityEntitiesByCountryCode(code);
-            countrylanguageService.deleteCountrylanguageEntitiesByCountryCode(code);
+            countryLanguageService.deleteCountryLanguageEntitiesByCountryCode(code);
 
             boolean isDeleted = countryService.deleteCountry(code);
             if (isDeleted) {
