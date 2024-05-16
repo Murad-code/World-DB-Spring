@@ -4,6 +4,7 @@ import org.example.hibernatehaunters.models.entities.CityEntity;
 import org.example.hibernatehaunters.models.entities.CountryEntity;
 import org.example.hibernatehaunters.models.exceptions.country.CountryCannotBeDeletedException;
 import org.example.hibernatehaunters.models.exceptions.country.CountryNotFoundException;
+import org.example.hibernatehaunters.models.exceptions.country.CountryUpdateBadRequestException;
 import org.example.hibernatehaunters.service.CityService;
 import org.example.hibernatehaunters.service.CountryService;
 import org.example.hibernatehaunters.service.CountryLanguageService;
@@ -48,8 +49,8 @@ public class CountryController {
     }
 
     @PutMapping("/country/{code}")
-    public CountryEntity updateCountry(@PathVariable String code, @RequestBody CountryEntity country) throws CountryNotFoundException {
-        CountryEntity countryUpdated =  countryService.updateCountry(code, country);
+    public CountryEntity updateCountry(@PathVariable String code, @RequestBody CountryEntity country) throws CountryNotFoundException, CountryUpdateBadRequestException {
+        CountryEntity countryUpdated = countryService.updateCountry(code, country);
 
         if (countryUpdated == null) {
             throw new CountryNotFoundException(code);

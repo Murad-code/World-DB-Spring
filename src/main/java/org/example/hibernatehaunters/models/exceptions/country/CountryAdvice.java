@@ -17,4 +17,16 @@ public class CountryAdvice {
         return ResponseEntity.badRequest().body(response);
     }
 
+    @ExceptionHandler(CountryCannotBeDeletedException.class)
+    public ResponseEntity<CountryErrorResponse> handleCountryCannotBeDeletedException(CountryCannotBeDeletedException e, HttpServletRequest request) {
+        CountryErrorResponse response = new CountryErrorResponse(e.getMessage(), request.getRequestURL().toString(),  400);
+        return ResponseEntity.badRequest().body(response);
+    }
+
+    @ExceptionHandler(CountryUpdateBadRequestException.class)
+    public ResponseEntity<CountryErrorResponse> handleCountryUpdateBadRequestException(CountryUpdateBadRequestException e, HttpServletRequest request) {
+        CountryErrorResponse response = new CountryErrorResponse(e.getMessage(), request.getRequestURL().toString(),  400);
+        return ResponseEntity.badRequest().body(response);
+    }
+
 }

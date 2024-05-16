@@ -1,6 +1,7 @@
 package org.example.hibernatehaunters.service;
 
 import org.example.hibernatehaunters.models.entities.CountryEntity;
+import org.example.hibernatehaunters.models.exceptions.country.CountryUpdateBadRequestException;
 import org.example.hibernatehaunters.models.respositories.CountryEntityRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +78,7 @@ public class CountryServiceTests {
     }
 
     @Test
-    public void testUpdateCountry() {
+    public void testUpdateCountry() throws CountryUpdateBadRequestException {
         CountryEntity existingCountry = new CountryEntity();
         existingCountry.setCode("USA");
         existingCountry.setName("United States");
