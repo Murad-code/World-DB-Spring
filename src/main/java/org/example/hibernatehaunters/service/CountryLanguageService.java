@@ -5,6 +5,8 @@ import org.example.hibernatehaunters.models.entities.CountryLanguageIdEntity;
 import org.example.hibernatehaunters.models.respositories.CountryLanguageEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -62,5 +64,10 @@ public class CountryLanguageService {
         } else {
             return false;
         }
+    }
+
+    @Transactional
+    public void deleteCountryLanguageEntitiesByCountryCode(String countryCode) {
+        countrylanguageEntityRepository.deleteCountryLanguageEntityByCountryCode_Code(countryCode);
     }
 }
