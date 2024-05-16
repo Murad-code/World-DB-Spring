@@ -2,8 +2,11 @@ package org.example.hibernatehaunters.service;
 
 import org.example.hibernatehaunters.models.entities.CountryLanguageEntity;
 import org.example.hibernatehaunters.models.entities.CountryLanguageIdEntity;
+import org.example.hibernatehaunters.models.exceptions.countrylanguage.CountryLanguageBadRequestException;
+import org.example.hibernatehaunters.models.exceptions.countrylanguage.CountryLanguageNotFoundException;
 import org.example.hibernatehaunters.models.respositories.CountryLanguageEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +23,13 @@ public class CountryLanguageService {
         this.countrylanguageEntityRepository = countrylanguageEntityRepository;
     }
 
-    public CountryLanguageEntity createCountryLanguage(CountryLanguageEntity countryLanguage) {
+    public CountryLanguageEntity createCountryLanguage(CountryLanguageEntity countryLanguage) throws CountryLanguageBadRequestException {
+        if (countryLanguage.getId() == null) {
+            throw new CountryLanguageBadRequestException("\n countryLanguage missing ID" + countryLanguage.toString());
+        }
+        if (countryLanguage.getCountryCode() == null){
+            throw new CountryLanguageBadRequestException("\n countryLanguage missing countryCode" + countryLanguage.toString());
+        }
         return countrylanguageEntityRepository.save(countryLanguage);
     }
 
@@ -37,9 +46,12 @@ public class CountryLanguageService {
         return countrylanguageEntityRepository.findAllCountryLanguageById_Language(language);
     }
 
-    public CountryLanguageEntity getCountryLanguageById(CountryLanguageIdEntity id)
-    {
-        return countrylanguageEntityRepository.findCountryLanguageEntityById(id);
+    public CountryLanguageEntity getCountryLanguageById(CountryLanguageIdEntity id) throws CountryLanguageNotFoundException {
+        if(countrylanguageEntityRepository.findCountryLanguageEntityById(id).isPresent()){
+            throw new CountryLanguageNotFoundException(id.toString());
+        } else{
+            return countrylanguageEntityRepository.findCountryLanguageEntityById(id).get();
+        }
     }
 
     public CountryLanguageEntity updateCountryLanguage(CountryLanguageIdEntity id, CountryLanguageEntity updatedCountryLanguage) {
