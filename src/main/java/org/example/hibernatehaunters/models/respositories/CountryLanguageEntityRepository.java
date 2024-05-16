@@ -11,4 +11,6 @@ public interface CountryLanguageEntityRepository extends JpaRepository<CountryLa
     List<CountryLanguageEntity> findAllCountryLanguageById_CountryCode(String countryCode);
     List<CountryLanguageEntity> findAllCountryLanguageById_Language(String language);
     CountryLanguageEntity findCountryLanguageEntityById(CountryLanguageIdEntity id);
+    void deleteCountryLanguageEntityByCountryCode_Code(String countryCode);
+
 }

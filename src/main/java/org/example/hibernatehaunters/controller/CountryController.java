@@ -59,7 +59,6 @@ public class CountryController {
 
     @DeleteMapping("/country/{code}")
     public ResponseEntity<String> deleteCountryByCode(@PathVariable String code) {
-        System.out.println("111" + code);
         Optional<CountryEntity> countryToDelete = countryService.getCountryByCode(code);
         if (countryToDelete.isPresent()) {
             cityService.deleteCityEntitiesByCountryCode(code);
