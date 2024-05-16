@@ -2,6 +2,8 @@ package org.example.hibernatehaunters.controller;
 
 import org.example.hibernatehaunters.models.entities.CityEntity;
 import org.example.hibernatehaunters.models.entities.CountryEntity;
+import org.example.hibernatehaunters.models.exceptions.country.CountryCannotBeDeletedException;
+import org.example.hibernatehaunters.models.exceptions.country.CountryNotFoundException;
 import org.example.hibernatehaunters.service.CityService;
 import org.example.hibernatehaunters.service.CountryService;
 import org.example.hibernatehaunters.service.CountryLanguageService;
@@ -46,19 +48,18 @@ public class CountryController {
     }
 
     @PutMapping("/country/{code}")
-    public CountryEntity updateCountry(@PathVariable String code, @RequestBody CountryEntity country) {
+    public CountryEntity updateCountry(@PathVariable String code, @RequestBody CountryEntity country) throws CountryNotFoundException {
         CountryEntity countryUpdated =  countryService.updateCountry(code, country);
 
         if (countryUpdated == null) {
-            // throw error ("country not found cant be updated")
-            System.out.println("Country update failed");
+            throw new CountryNotFoundException(code);
         }
 
         return countryUpdated;
     }
 
     @DeleteMapping("/country/{code}")
-    public ResponseEntity<String> deleteCountryByCode(@PathVariable String code) {
+    public ResponseEntity<String> deleteCountryByCode(@PathVariable String code) throws CountryNotFoundException, CountryCannotBeDeletedException {
         Optional<CountryEntity> countryToDelete = countryService.getCountryByCode(code);
         if (countryToDelete.isPresent()) {
             cityService.deleteCityEntitiesByCountryCode(code);
@@ -68,10 +69,10 @@ public class CountryController {
             if (isDeleted) {
                 return new ResponseEntity<>("Country with code " + code + " deleted successfully.", HttpStatus.OK);
             } else {
-                return new ResponseEntity<>("Country with code " + code + " is unable to be deleted", HttpStatus.NOT_FOUND);
+                throw new CountryCannotBeDeletedException(code);
             }
         } else {
-            return new ResponseEntity<>("Country with code " + code + " does not exist.", HttpStatus.NOT_FOUND);
+            throw new CountryNotFoundException(code);
         }
     }
 }
