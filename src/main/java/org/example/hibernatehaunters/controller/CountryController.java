@@ -2,6 +2,7 @@ package org.example.hibernatehaunters.controller;
 
 import org.example.hibernatehaunters.models.entities.CityEntity;
 import org.example.hibernatehaunters.models.entities.CountryEntity;
+import org.example.hibernatehaunters.models.exceptions.country.CountryBadRequestException;
 import org.example.hibernatehaunters.models.exceptions.country.CountryCannotBeDeletedException;
 
 import org.example.hibernatehaunters.models.exceptions.country.CountryNotFoundException;
@@ -54,7 +55,7 @@ public class CountryController {
 
 
     @PostMapping("/country")
-    public CountryEntity addCountry(@RequestBody CountryEntity country) {
+    public CountryEntity addCountry(@RequestBody CountryEntity country) throws CountryBadRequestException {
         return countryService.createCountry(country);
 
     }

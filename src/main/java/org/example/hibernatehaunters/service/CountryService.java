@@ -2,6 +2,7 @@ package org.example.hibernatehaunters.service;
 
 import org.example.hibernatehaunters.models.entities.CountryEntity;
 import org.example.hibernatehaunters.models.exceptions.country.CountryUpdateBadRequestException;
+import org.example.hibernatehaunters.models.exceptions.country.CountryBadRequestException;
 import org.example.hibernatehaunters.models.respositories.CountryEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,18 @@ public class CountryService {
         this.countryRepository = countryRepository;
     }
 
-    public CountryEntity createCountry(CountryEntity country) {
+    public CountryEntity createCountry(CountryEntity country) throws CountryBadRequestException {
+        if(country.getCode() ==  null ||
+                country.getName() == null ||
+                country.getContinent() == null ||
+                country.getRegion() == null ||
+                country.getSurfaceArea() == null ||
+                country.getPopulation() == null ||
+                country.getLocalName() == null ||
+                country.getGovernmentForm()== null||
+                country.getCode2()==null){
+            throw new CountryBadRequestException();
+        }
         return countryRepository.save(country);
     }
 
