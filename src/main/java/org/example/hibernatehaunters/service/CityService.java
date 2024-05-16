@@ -3,6 +3,8 @@ package org.example.hibernatehaunters.service;
 import org.example.hibernatehaunters.models.entities.CityEntity;
 import org.example.hibernatehaunters.models.respositories.CityEntityRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -50,5 +52,10 @@ public class CityService {
         } else {
             return false;
         }
+    }
+
+    @Transactional
+    public void deleteCityEntitiesByCountryCode(String countryCode) {
+        cityEntityRepository.deleteCityEntitiesByCountryCode_Code(countryCode);
     }
 }
