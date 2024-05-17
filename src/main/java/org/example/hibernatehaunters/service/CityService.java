@@ -1,7 +1,9 @@
 package org.example.hibernatehaunters.service;
 
 import org.example.hibernatehaunters.models.entities.CityEntity;
+import org.example.hibernatehaunters.models.exceptions.cities.CityNotCreatedException;
 import org.example.hibernatehaunters.models.respositories.CityEntityRepository;
+import org.hibernate.TransientPropertyValueException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +19,7 @@ public class CityService {
         this.cityEntityRepository = cityEntityRepository;
     }
 
-    public CityEntity createCity(CityEntity city) {
+    public CityEntity createCity(CityEntity city){
         return cityEntityRepository.save(city);
     }
 

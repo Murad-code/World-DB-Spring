@@ -7,6 +7,7 @@ import org.example.hibernatehaunters.models.exceptions.cities.CityNotFoundExcept
 import org.example.hibernatehaunters.models.exceptions.cities.CityNotUpdatedException;
 import org.example.hibernatehaunters.models.respositories.CityEntityRepository;
 import org.example.hibernatehaunters.service.CityService;
+import org.hibernate.TransientPropertyValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,12 +31,13 @@ public class CityController {
 
     //Create
     @PostMapping("/city")
-    public CityEntity addCity(@RequestBody CityEntity city) throws CityNotCreatedException{
-        CityEntity cityEntity = cityService.createCity(city);
-        if(cityEntity != null){
-            return cityEntity;
+    public CityEntity addCity(@RequestBody CityEntity city)
+            throws CityNotCreatedException{
+        try{
+            return cityService.createCity(city);
         }
-        else {
+        catch (Exception e)
+        {
             throw new CityNotCreatedException(city.getName());
         }
     }
@@ -44,11 +46,12 @@ public class CityController {
     @PutMapping("/city/{id}")
     public CityEntity updateCity(@RequestBody CityEntity cityEntity, @PathVariable Integer id)
             throws CityNotUpdatedException {
-        CityEntity ce = cityService.updateCity(id, cityEntity);
-        if (ce != null) {
-            return ce;
-        } else {
-            throw new CityNotUpdatedException(cityEntity.getName());
+        try{
+            return cityService.updateCity(id, cityEntity);
+        }
+        catch (Exception e)
+        {
+            throw new CityNotUpdatedException(cityEntity.getId().toString());
         }
     }
 
