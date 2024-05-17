@@ -44,11 +44,8 @@ public class CountryLanguageController {
     @PostMapping("/countryLanguage/create")
     public CountryLanguageEntity addLanguage(@RequestBody CountryLanguageEntity countryLanguage) throws CountryLanguageBadRequestException {
 
-        try {
-            countryLanguageService.createCountryLanguage(countryLanguage);
-        } catch(Exception e){
-            throw new CountryLanguageBadRequestException("Country language creation failed: " + e.getMessage());
-        }
+        countryLanguageService.createCountryLanguage(countryLanguage);
+
         return countryLanguage;
     }
     //update
