@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class CountryAdvice {
 
     @ExceptionHandler(CountryNotFoundException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<CountryErrorResponse> handleCountryNotFoundException(CountryNotFoundException e, HttpServletRequest request) {
-        CountryErrorResponse response = new CountryErrorResponse(e.getMessage(), request.getRequestURL().toString(),  400);
+        CountryErrorResponse response = new CountryErrorResponse(e.getMessage(), request.getRequestURL().toString(),  404);
         return ResponseEntity.badRequest().body(response);
     }
 

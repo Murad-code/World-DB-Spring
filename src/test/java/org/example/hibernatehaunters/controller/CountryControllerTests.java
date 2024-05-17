@@ -75,15 +75,12 @@ public class CountryControllerTests {
                 .jsonPath("$.code2").isEqualTo("AD");
     }
 
-
-
-
 //    @Test
 //    @DisplayName("Check that country is deleted successfully")
-//    void statusCodeIs200() {
+//    void checkThatCountryIsDeletedSuccessfully() {
 //        webTestClient
 //                .delete()
-//                .uri("http://localhost:8080/country")
+//                .uri("http://localhost:8080/country/AND")
 //                .exchange()
 //                .expectStatus()
 //                .is2xxSuccessful();
