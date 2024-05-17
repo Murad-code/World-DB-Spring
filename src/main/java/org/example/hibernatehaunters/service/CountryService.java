@@ -1,6 +1,7 @@
 package org.example.hibernatehaunters.service;
 
 import org.example.hibernatehaunters.models.entities.CountryEntity;
+import org.example.hibernatehaunters.models.exceptions.country.CountryNotFoundException;
 import org.example.hibernatehaunters.models.exceptions.country.CountryUpdateBadRequestException;
 import org.example.hibernatehaunters.models.exceptions.country.CountryBadRequestException;
 import org.example.hibernatehaunters.models.respositories.CountryEntityRepository;
@@ -42,9 +43,10 @@ public class CountryService {
         return countryRepository.findById(code);
     }
 
-    public CountryEntity updateCountry(String code, CountryEntity updatedCountry) throws CountryUpdateBadRequestException {
+    public CountryEntity updateCountry(String code, CountryEntity updatedCountry) throws CountryUpdateBadRequestException, CountryNotFoundException {
         Optional<CountryEntity> countryOptional = countryRepository.findById(code);
         if (countryOptional.isPresent()) {
+            System.out.println("22222: " + countryOptional.get());
             try {
                 CountryEntity existingCountry = countryOptional.get();
                 existingCountry.setName(updatedCountry.getName());
@@ -62,12 +64,14 @@ public class CountryService {
                 existingCountry.setCapital(updatedCountry.getCapital());
                 existingCountry.setCode2(updatedCountry.getCode2());
 
+                System.out.println("Saving updated changes");
                 return countryRepository.save(existingCountry);
             } catch (Exception e) {
+                System.out.println("Inside catch statement");
                 throw new CountryUpdateBadRequestException(code);
             }
         } else {
-            return null;
+            throw new CountryNotFoundException(code);
         }
     }
 

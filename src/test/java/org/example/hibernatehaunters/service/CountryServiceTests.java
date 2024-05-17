@@ -2,6 +2,7 @@ package org.example.hibernatehaunters.service;
 
 import org.example.hibernatehaunters.models.entities.CountryEntity;
 import org.example.hibernatehaunters.models.exceptions.country.CountryBadRequestException;
+import org.example.hibernatehaunters.models.exceptions.country.CountryNotFoundException;
 import org.example.hibernatehaunters.models.exceptions.country.CountryUpdateBadRequestException;
 import org.example.hibernatehaunters.models.respositories.CountryEntityRepository;
 import org.junit.jupiter.api.Test;
@@ -79,7 +80,7 @@ public class CountryServiceTests {
     }
 
    @Test
-    public void testUpdateCountry() throws CountryUpdateBadRequestException {
+    public void testUpdateCountry() throws CountryUpdateBadRequestException, CountryNotFoundException {
         CountryEntity existingCountry = new CountryEntity();
         existingCountry.setCode("USA");
         existingCountry.setName("United States");

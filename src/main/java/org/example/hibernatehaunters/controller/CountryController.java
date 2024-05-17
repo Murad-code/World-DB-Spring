@@ -63,10 +63,6 @@ public class CountryController {
     public CountryEntity updateCountry(@PathVariable String code, @RequestBody CountryEntity country) throws CountryNotFoundException, CountryUpdateBadRequestException {
         CountryEntity countryUpdated = countryService.updateCountry(code, country);
 
-        if (countryUpdated == null) {
-            throw new CountryNotFoundException(code);
-        }
-
         return countryUpdated;
     }
 

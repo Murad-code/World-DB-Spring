@@ -52,13 +52,13 @@ public class CountryControllerTests {
     @Test
     @DisplayName("Test Update Country is Successful")
     public void testUpdateCountryIsSuccessful() {
-        webTestClient.put().uri("/country/AND")
+        webTestClient.put().uri("/country/AIA")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue("{\"code\":\"AND\",\"name\":\"Andorra\",\"continent\":\"Europe\",\"region\":\"Southern Europe\",\"surfaceArea\":468.00,\"indepYear\":1278,\"population\":100000,\"lifeExpectancy\":83.5,\"gnp\":1630.00,\"gnpold\":100.00,\"localName\":\"Andorra\",\"governmentForm\":\"Parliamentary Coprincipality\",\"headOfState\":\"Murad\",\"capital\":55,\"code2\":\"AD\"}")
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.code").isEqualTo("AND")
+                .jsonPath("$.code").isEqualTo("AIA")
                 .jsonPath("$.name").isEqualTo("Andorra")
                 .jsonPath("$.continent").isEqualTo("Europe")
                 .jsonPath("$.region").isEqualTo("Southern Europe")
