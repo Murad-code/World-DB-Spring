@@ -2,6 +2,11 @@ package org.example.hibernatehaunters.controller;
 
 import org.example.hibernatehaunters.models.entities.CityEntity;
 import org.example.hibernatehaunters.models.entities.CountryEntity;
+import org.example.hibernatehaunters.models.exceptions.country.CountryBadRequestException;
+import org.example.hibernatehaunters.models.exceptions.country.CountryCannotBeDeletedException;
+
+import org.example.hibernatehaunters.models.exceptions.country.CountryNotFoundException;
+import org.example.hibernatehaunters.models.exceptions.country.CountryUpdateBadRequestException;
 import org.example.hibernatehaunters.service.CityService;
 import org.example.hibernatehaunters.service.CountryService;
 import org.example.hibernatehaunters.service.CountryLanguageService;
@@ -29,36 +34,45 @@ public class CountryController {
 
 
     @GetMapping("/countries")
-    public List<CountryEntity> getAllCountries() {
+    public List<CountryEntity> getAllCountries() throws CountryNotFoundException {
+      List<CountryEntity> countryEntityList =countryService.getAllCountries();
+        if (countryEntityList.isEmpty()){
+            throw new CountryNotFoundException("none");
+        } else {
         return countryService.getAllCountries();
-
+        }
     }
 
     @GetMapping("/country/{code}")
-    public Optional<CountryEntity> getCountryById(@PathVariable String code) {
-        return countryService.getCountryByCode(code);
+    public Optional <CountryEntity> getCountryByCode(@PathVariable String code) throws CountryNotFoundException {
+    Optional<CountryEntity> countryToFetch  = countryService.getCountryByCode(code);
+        if(countryToFetch.isPresent()){
+            return countryToFetch;
+            } else {
+            throw new CountryNotFoundException(code);
+        }
     }
 
+
     @PostMapping("/country")
-    public CountryEntity addCountry(@RequestBody CountryEntity country) {
+    public CountryEntity addCountry(@RequestBody CountryEntity country) throws CountryBadRequestException {
         return countryService.createCountry(country);
 
     }
 
     @PutMapping("/country/{code}")
-    public CountryEntity updateCountry(@PathVariable String code, @RequestBody CountryEntity country) {
-        CountryEntity countryUpdated =  countryService.updateCountry(code, country);
+    public CountryEntity updateCountry(@PathVariable String code, @RequestBody CountryEntity country) throws CountryNotFoundException, CountryUpdateBadRequestException {
+        CountryEntity countryUpdated = countryService.updateCountry(code, country);
 
         if (countryUpdated == null) {
-            // throw error ("country not found cant be updated")
-            System.out.println("Country update failed");
+            throw new CountryNotFoundException(code);
         }
 
         return countryUpdated;
     }
 
     @DeleteMapping("/country/{code}")
-    public ResponseEntity<String> deleteCountryByCode(@PathVariable String code) {
+    public ResponseEntity<String> deleteCountryByCode(@PathVariable String code) throws CountryNotFoundException, CountryCannotBeDeletedException {
         Optional<CountryEntity> countryToDelete = countryService.getCountryByCode(code);
         if (countryToDelete.isPresent()) {
             cityService.deleteCityEntitiesByCountryCode(code);
@@ -68,10 +82,10 @@ public class CountryController {
             if (isDeleted) {
                 return new ResponseEntity<>("Country with code " + code + " deleted successfully.", HttpStatus.OK);
             } else {
-                return new ResponseEntity<>("Country with code " + code + " is unable to be deleted", HttpStatus.NOT_FOUND);
+                throw new CountryCannotBeDeletedException(code);
             }
         } else {
-            return new ResponseEntity<>("Country with code " + code + " does not exist.", HttpStatus.NOT_FOUND);
+            throw new CountryNotFoundException(code);
         }
     }
 }
