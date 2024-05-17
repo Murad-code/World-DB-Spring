@@ -2,6 +2,7 @@ package org.example.hibernatehaunters.controller;
 
 import org.example.hibernatehaunters.models.entities.CityEntity;
 import org.example.hibernatehaunters.models.exceptions.cities.CityNotCreatedException;
+import org.example.hibernatehaunters.models.exceptions.cities.CityNotDeletedException;
 import org.example.hibernatehaunters.models.exceptions.cities.CityNotFoundException;
 import org.example.hibernatehaunters.models.exceptions.cities.CityNotUpdatedException;
 import org.example.hibernatehaunters.models.respositories.CityEntityRepository;
@@ -88,9 +89,15 @@ public class CityController {
 
     //Delete
     @DeleteMapping("/city/{id}")
-    public Boolean deleteCity(@PathVariable Integer id){
-        //if(cityService.deleteCity(id) != null)
-        return cityService.deleteCity(id);
+    public Boolean deleteCity(@PathVariable Integer id) throws CityNotDeletedException{
+        boolean result = cityService.deleteCity(id);
+        if(result)
+        {
+            return true;
+        }
+        else{
+            throw new CityNotDeletedException(id.toString());
+        }
     }
 
 }

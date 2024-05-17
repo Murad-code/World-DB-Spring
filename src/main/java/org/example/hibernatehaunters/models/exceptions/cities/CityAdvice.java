@@ -17,23 +17,11 @@ public class CityAdvice {
             CityNotFoundException e,
             HttpServletRequest request){
                 CityErrorResponse response = new CityErrorResponse(
-                        e.getMessage(), 400, request.getRequestURL().toString());
+                        e.getMessage(), 404, request.getRequestURL().toString());
 
                 return ResponseEntity.badRequest().body(response);
 
     }
-
-//    @ExceptionHandler(CityNotCreatedException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public ResponseEntity<CityNotCreatedException> cityNotCreatedHandler(
-//            CityNotCreatedException e,
-//            HttpServletRequest request){
-//        CityErrorResponse response = new CityErrorResponse(
-//                e.getMessage(), 400, request.getRequestURL().toString());
-//
-//        return ResponseEntity.badRequest().body(response);
-//
-//    }
 
     //post
     @ExceptionHandler(CityNotCreatedException.class)
@@ -60,10 +48,10 @@ public class CityAdvice {
     }
 
     //delete
-    @ExceptionHandler(CityNotDeletedExceptions.class)
+    @ExceptionHandler(CityNotDeletedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<CityErrorResponse> cityNotDeletedHandler(
-            CityNotDeletedExceptions e,
+            CityNotDeletedException e,
             HttpServletRequest request) {
         CityErrorResponse response = new CityErrorResponse(
                 e.getMessage(), 400, request.getRequestURL().toString());
