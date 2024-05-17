@@ -87,9 +87,9 @@ public class CityController {
 
 
     //Delete
-    @DeleteMapping("city/{id}")
+    @DeleteMapping("/city/{id}")
     public Boolean deleteCity(@PathVariable Integer id){
-        if(cityService.deleteCity(id) != null)
+        //if(cityService.deleteCity(id) != null)
         return cityService.deleteCity(id);
     }
 

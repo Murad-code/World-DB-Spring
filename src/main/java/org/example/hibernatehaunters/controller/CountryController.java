@@ -1,6 +1,5 @@
 package org.example.hibernatehaunters.controller;
 
-import org.example.hibernatehaunters.models.entities.CityEntity;
 import org.example.hibernatehaunters.models.entities.CountryEntity;
 import org.example.hibernatehaunters.models.exceptions.country.CountryBadRequestException;
 import org.example.hibernatehaunters.models.exceptions.country.CountryCannotBeDeletedException;

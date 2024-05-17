@@ -1,7 +1,6 @@
 package org.example.hibernatehaunters.controller;
 
 
-import org.apache.coyote.BadRequestException;
 import org.example.hibernatehaunters.models.entities.CountryLanguageEntity;
 import org.example.hibernatehaunters.models.exceptions.countrylanguage.CountryLanguageBadRequestException;
 import org.example.hibernatehaunters.models.exceptions.countrylanguage.CountryLanguageNotFoundException;
@@ -40,16 +39,14 @@ public class CountryLanguageController {
     }
 
 
-    //create
-    @PostMapping("/countryLanguage/create")
+    @PostMapping("/countryLanguage")
     public CountryLanguageEntity addLanguage(@RequestBody CountryLanguageEntity countryLanguage) throws CountryLanguageBadRequestException {
 
         countryLanguageService.createCountryLanguage(countryLanguage);
 
         return countryLanguage;
     }
-    //update
-    @PutMapping("/countryLanguage/update/official")
+    @PutMapping("/countryLanguage/official")
     public CountryLanguageEntity updateLanguageIsOfficial(@RequestBody CountryLanguageEntity countryLanguage) throws CountryLanguageNotFoundException {
         CountryLanguageEntity countryLanguageUpdated = countryLanguageService.getCountryLanguageById(countryLanguage.getId());
         countryLanguageService.updateCountryLanguage(countryLanguageUpdated.getId(), countryLanguage);
@@ -59,7 +56,7 @@ public class CountryLanguageController {
 
 
     //delete
-    @DeleteMapping("/countryLanguages/delete")
+    @DeleteMapping("/countryLanguages")
     public List<CountryLanguageEntity> deleteCountryLanguagesByCountryCode(@RequestParam String code) throws CountryLanguageNotFoundException {
         List<CountryLanguageEntity> countryLanguageEntities = countryLanguageService.getCountryLanguageByCountryCode(code);
         if(countryLanguageEntities.isEmpty()){
@@ -72,17 +69,7 @@ public class CountryLanguageController {
         return countryLanguageEntities;
     }
 
-//
-//    @DeleteMapping("/countryLanguages/delete/language")
-//    public List<CountryLanguageEntity> deleteCountryLanguage (@PathVariable String name){
-//        List<CountryLanguageEntity> countryLanguageEntities = countryLanguageService.getCountryLanguageByLanguage(name);
-//        for(CountryLanguageEntity ce : countryLanguageEntities)
-//        {
-//            countryLanguageService.deleteCountryLanguage(ce.getId());
-//        }
-//        return countryLanguageEntities;
-//
-//    }
+
 
 
 }
